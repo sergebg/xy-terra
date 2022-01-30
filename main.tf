@@ -9,7 +9,7 @@ resource "google_compute_network" "net1" {
 }
 
 resource "google_compute_subnetwork" "subnet1" {
-  name = ${var.prefix}-subnetwork-${var.region}
+  name = "${var.prefix}-subnetwork-${var.region}"
   region = var.region
   network = google_compute_network.net1.self_link
   ip_cidr_range = "10.0.10.0/24"
