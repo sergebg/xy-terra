@@ -16,7 +16,7 @@ resource "google_compute_subnetwork" "subnet1" {
 }
 
 resource "google_compute_instance" "vm_chicago" {
-  name         = "harbin"
+  name         = "chicago"
   zone         = var.zone
   machine_type = "f1-micro"
 
