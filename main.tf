@@ -22,7 +22,7 @@ resource "google_compute_instance" "vm_chicago" {
 
   boot_disk {
     initialize_params {
-      image = "debian-cloud/debian-10-buster"
+      image = "debian-cloud/debian-10"
       size  = 10
       type  = "pd-standard"
     }
