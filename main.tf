@@ -31,7 +31,8 @@ resource "google_compute_instance" "vm_chicago" {
   }
 
   network_interface {
-    network = google_compute_network.net1.name
+    network    = google_compute_network.net1.name
+    subnetwork = google_compute_subnetwork.subnet1.name
     access_config {
     }
   }
