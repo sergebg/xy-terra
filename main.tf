@@ -59,6 +59,6 @@ resource "google_compute_instance" "vm_chicago" {
   }
 
   allow_stopping_for_update = true
-  description               = "Chicago VM"
+  description               = "Preemptible compute instance"
 }
 
