@@ -46,3 +46,17 @@ resource "google_compute_instance" "vm_chicago" {
   allow_stopping_for_update = true
   description               = "Chicago VM"
 }
+
+resource "google_compute_firewall" "firewall1" {
+  name    = "net1-firewall"
+  network = google_compute_network.net1.name
+  allow {
+    protocol = "tcp"
+    ports    = ["22"]
+  }
+  target_tags   = ["ssh"]
+  source_ranges = ["0.0.0.0/0"]
+  log_config {
+    metadata = "INCLUDE_ALL_METADATA"
+  }
+}
