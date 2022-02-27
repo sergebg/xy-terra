@@ -15,10 +15,25 @@ resource "google_compute_subnetwork" "subnet1" {
   ip_cidr_range = "10.0.10.0/24"
 }
 
+resource "google_compute_firewall" "firewall1" {
+  name    = "net1-firewall"
+  network = google_compute_network.net1.name
+  allow {
+    protocol = "tcp"
+    ports    = ["22"]
+  }
+  target_tags   = ["ssh"]
+  source_ranges = ["0.0.0.0/0"]
+  log_config {
+    metadata = "INCLUDE_ALL_METADATA"
+  }
+}
+
 resource "google_compute_instance" "vm_chicago" {
   name         = "chicago"
   zone         = var.zone
   machine_type = "f1-micro"
+  tags         = ["ssh"]
 
   boot_disk {
     initialize_params {
@@ -47,16 +62,3 @@ resource "google_compute_instance" "vm_chicago" {
   description               = "Chicago VM"
 }
 
-resource "google_compute_firewall" "firewall1" {
-  name    = "net1-firewall"
-  network = google_compute_network.net1.name
-  allow {
-    protocol = "tcp"
-    ports    = ["22"]
-  }
-  target_tags   = ["ssh"]
-  source_ranges = ["0.0.0.0/0"]
-  log_config {
-    metadata = "INCLUDE_ALL_METADATA"
-  }
-}
