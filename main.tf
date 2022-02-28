@@ -34,6 +34,10 @@ resource "google_compute_instance" "vm_chicago" {
   zone         = var.zone
   machine_type = "f1-micro"
   tags         = ["ssh"]
+  service_account {
+    email  = google_service_account.test_sa.email
+    scopes = ["cloud-platform"]
+  }
 
   boot_disk {
     initialize_params {
@@ -62,3 +66,7 @@ resource "google_compute_instance" "vm_chicago" {
   description               = "Preemptible compute instance"
 }
 
+resource "google_service_account" "test_sa" {
+  account_id   = "test-sa"
+  display_name = "Test SA"
+}
